@@ -17,7 +17,7 @@ import (
 )
 
 const (
-  SECRET_FILE = "/.secret"
+  SECRET_FILE = "/.secret/idp-secret"
 )
 
 // TODO: 
@@ -28,7 +28,7 @@ func main() {
   var server1Url *url.URL
   var err error
 
-  if server1Url, err = url.Parse(os.Getenv("KPROXY_K8S_API")); err != nil {
+  if server1Url, err = url.Parse(os.Getenv("KROXY_K8S_API")); err != nil {
     logrus.Fatal("Failed to parse url: ", err)
   }
 

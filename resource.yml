@@ -5,7 +5,7 @@ metadata:
   name: kroxy-idp-secret-file
   namespace: acaleph
 data:
-  idp_secret: ekUwWEZoeER6TV9NT2haS3lrYWpMc3BieEh4cHlyMzAyT1BRdWRFRFNBUg==
+  idp-secret: ekUwWEZoeER6TV9NT2haS3lrYWpMc3BieEh4cHlyMzAyT1BRdWRFRFNBUg==
 
 ---
 kind: Service
@@ -58,7 +58,7 @@ spec:
           env:
             - name: KROXY_TOKEN_FILE
               value: /var/run/secrets/kubernetes.io/serviceaccount/token
-            - name: KPROXY_K8S_API
+            - name: KROXY_K8S_API
               value: https://kubernetes.default
           ports:
             - name: service
@@ -68,7 +68,4 @@ spec:
             - name: kroxy-idp-secret
               mountPath: /.secret
               readOnly: true
-          livenessProbe:
-            tcpSocket:
-              port: 8080
           imagePullPolicy: Always
