@@ -5,7 +5,7 @@ metadata:
   name: kroxy-idp-secret-file
   namespace: acaleph
 data:
-  idp-secret: ekUwWEZoeER6TV9NT2haS3lrYWpMc3BieEh4cHlyMzAyT1BRdWRFRFNBUg==
+  idp-secret: ekUwWEZoeER6TV9NT2haS3lrYWpMc3BieEh4cHlyMzAyT1BRdWRFRFNBUi03NW1NbHVOb1BFa2dsbkVtVXBHZg==
 
 ---
 kind: Service
