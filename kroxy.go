@@ -33,10 +33,12 @@ func main() {
   }
 
   reverseProxy := modifiedSingleHost(server1Url)
-  //disable tls for now when connecting to the actul kubernetes api server
+  //disable tls for now when connecting to the actual kubernetes api server
   http.DefaultTransport.(*http.Transport).TLSClientConfig = &tls.Config{InsecureSkipVerify: true}
 
   server := prepareServer(reverseProxy)
+  logrus.Info("Starting kroxy.. A simple reverse proxy that forwards request to kubernetes api")
+  logrus.Info("Listening on port: :8080")
   err = http.ListenAndServe(":8080", server)
   if err != nil {
     logrus.Fatal("ListenAndServe: ", err)
@@ -55,7 +57,7 @@ func getSecret() string {
 }
 
 
-// copied from net/http/httputil.something
+// copied from net/http/httputil reverse proxy
 func modifiedSingleHost(target *url.URL) *httputil.ReverseProxy {
   targetQuery := target.RawQuery
   director := func(req *http.Request) {
@@ -84,7 +86,7 @@ func prepareServer(handler http.Handler) http.Handler {
       } else {
         err := validateToken(r)
         if err != nil {
-          logrus.Info(err)
+          logrus.Error(err)
           w.WriteHeader(http.StatusUnauthorized)
         } else {
           handler.ServeHTTP(w, r)
