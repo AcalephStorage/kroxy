@@ -81,13 +81,13 @@ func prepareServer(handler http.Handler) http.Handler {
 		if r.Method == "OPTIONS" {
 			w.WriteHeader(http.StatusOK)
 		} else {
-			err := validateToken(r)
-			if err != nil {
-				logrus.Error(err)
-				w.WriteHeader(http.StatusUnauthorized)
-			} else {
-				handler.ServeHTTP(w, r)
-			}
+			// err := validateToken(r)
+			// if err != nil {
+			// 	logrus.Error(err)
+			// 	w.WriteHeader(http.StatusUnauthorized)
+			// } else {
+			handler.ServeHTTP(w, r)
+			// }
 		}
 	})
 }
